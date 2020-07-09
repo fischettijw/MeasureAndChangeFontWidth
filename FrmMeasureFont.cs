@@ -25,29 +25,23 @@ namespace MeasureAndChangeFontWidth
 
         private void BtnTest_Click(object sender, EventArgs e)
         {
+            //int newWidth = AutoSizeTextBox(TxtTextInput);
+            int newWidth = AutoSizeTextBox(TxtTextInput, Convert.ToInt32(TxtFontSize.Text));
 
-            Size mySize = new Size();
+            TxtTextInput.Select(TxtTextInput.Text.Length, 0);
+            TxtTextInput.Focus();
 
-            Font myFont = new Font(TxtTextInput.Font.FontFamily, Convert.ToInt32(TxtFontSize.Text));
-            TxtTextInput.Font = myFont;
-            mySize = TextRenderer.MeasureText(TxtTextInput.Text, myFont);
+            this.ClientSize = new Size(newWidth + 50, this.ClientSize.Height);
 
-            Size size = new Size(mySize.Width, mySize.Height);
-            TxtTextInput.ClientSize = size;
-
-            TxtTextInput.Select(0, 0);
-
-            this.ClientSize = new Size(mySize.Width + 50, this.ClientSize.Height);
         }
 
         // Make the TextBox fit its contents.
-        private void AutoSizeTextBox(TextBox txtBox, int newFontSize = 0)
+        private int AutoSizeTextBox(TextBox txtBox, int newFontSize = 0)
         {
-            if (newFontSize == 0) newFontSize = (int)txtBox.Font.Size;
-            const int xMargin = 0;
-            const int yMargin = 2;
+            if (newFontSize != 0) txtBox.Font = new Font(txtBox.Font.FontFamily, newFontSize);
             Size size = TextRenderer.MeasureText(txtBox.Text, txtBox.Font);
-            txtBox.ClientSize = new Size(size.Width + xMargin, size.Height + yMargin);
+            txtBox.ClientSize = new Size(size.Width, size.Height);
+            return txtBox.ClientSize.Width;
         }
     }
 
