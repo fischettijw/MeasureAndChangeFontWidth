@@ -32,7 +32,6 @@ namespace MeasureAndChangeFontWidth
             TxtTextInput.Font = myFont;
             mySize = TextRenderer.MeasureText(TxtTextInput.Text, myFont);
 
-
             Size size = new Size(mySize.Width, mySize.Height);
             TxtTextInput.ClientSize = size;
 
