@@ -50,4 +50,5 @@ namespace MeasureAndChangeFontWidth
             txtBox.ClientSize = new Size(size.Width + xMargin, size.Height + yMargin);
         }
     }
+
 }
